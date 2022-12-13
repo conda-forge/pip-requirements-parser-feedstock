@@ -29,7 +29,7 @@ test:
     - pip_requirements_parser
   commands:
     - pip check
-    {% set skips = "" %}
+    {% set skips = '-k "not skeleton_codestyle"' %}
     {% set cov = 89 %}
     {% set skips = '-k "not (to_dict or dumps_unparse or unexisting_path)"' %}  # [win]
     {% set cov = 84 %}  # [win]
