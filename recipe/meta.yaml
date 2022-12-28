@@ -1,8 +1,8 @@
+{% set version = "32.0.1" %}
 {% set cov = 89 %}
 {% set cov = 84 %}  # [win]
 {% set skips = "-k \"not skeleton_codestyle\"" %}
 {% set skips = "-k \"not (to_dict or dumps_unparse or unexisting_path)\"" %}  # [win]
-{% set version = "32.0.1" %}
 
 package:
   name: pip-requirements-parser
@@ -23,7 +23,8 @@ requirements:
     - python >=3.6
     - setuptools-scm >=4
   run:
-    - packaging <22.0.0
+    - packaging
+    - pyparsing
     - python >=3.6
 
 test:
@@ -31,12 +32,9 @@ test:
     - tests
   imports:
     - pip_requirements_parser
+    - packaging_legacy_version
   commands:
     - pip check
-    {% set skips = '-k "not skeleton_codestyle"' %}
-    {% set cov = 89 %}
-    {% set skips = '-k "not (to_dict or dumps_unparse or unexisting_path)"' %}  # [win]
-    {% set cov = 84 %}  # [win]
     - cd tests && pytest -vv --cov pip_requirements_parser --cov-report term-missing:skip-covered --no-cov-on-fail --cov-fail-under {{ cov }} {{ skips }}
   requires:
     - pip
