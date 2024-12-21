@@ -9,23 +9,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pip-requirements-parser/pip-requirements-parser-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pip-requirements-parser/pip-requirements-parser-{{ version }}.tar.gz
   sha256: b4fa3a7a0be38243123cf9d1f3518da10c51bdb165a2b2985566247f9155a7d3
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools-scm >=4
   run:
     - packaging
     - pyparsing
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   source_files:
@@ -39,6 +39,7 @@ test:
   requires:
     - pip
     - pytest-cov
+    - python {{ python_min }}
 
 about:
   home: https://github.com/nexB/pip-requirements-parser
