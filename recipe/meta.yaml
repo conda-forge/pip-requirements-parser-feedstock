@@ -37,7 +37,7 @@ test:
     - packaging_legacy_version
   commands:
     - pip check
-    - coverage run --source pip_requirements_parser --branch -m pytest -vv --tb=long --color-yes {{ skips }}
+    - coverage run --source pip_requirements_parser --branch -m pytest -vv --tb=long --color=yes {{ skips }}
     - coverage report --show-missing --skip-covered --fail-under {{ cov }} 
   requires:
     - coverage
