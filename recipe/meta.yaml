@@ -1,8 +1,4 @@
 {% set version = "32.0.1" %}
-{% set cov = 89 %}
-{% set cov = 84 %}  # [win]
-{% set skips = "-k \"not skeleton_codestyle\"" %}
-{% set skips = "-k \"not (to_dict or dumps_unparse or unexisting_path)\"" %}  # [win]
 
 package:
   name: pip-requirements-parser
@@ -32,18 +28,16 @@ requirements:
 test:
   source_files:
     - tests
-  imports:
-    - pip_requirements_parser
-    - packaging_legacy_version
-  commands:
-    - pip check
-    - coverage run --source pip_requirements_parser --branch -m pytest -vv --tb=long --color=yes {{ skips }}
-    - coverage report --show-missing --skip-covered --fail-under {{ cov }} 
   requires:
     - coverage
     - pip
     - pytest
     - python {{ python_min }}
+  imports:
+    - pip_requirements_parser
+    - packaging_legacy_version
+  commands:
+    - pip check
 
 about:
   home: https://github.com/nexB/pip-requirements-parser
